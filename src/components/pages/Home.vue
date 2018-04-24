@@ -21,7 +21,7 @@
 import Vue from "vue";
 import {Lazyload, Swipe, SwipeItem } from "vant";
 Vue.use(Lazyload,{
-  loading:require('../../assets/images/loading.gif')
+  //loading:require('../../assets/images/loading.gif')
 }).use(Swipe).use(SwipeItem);
 export default {
   name: "Home",
