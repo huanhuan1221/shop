@@ -1,4 +1,4 @@
-# myself
+# shop
 
 
 > A Vue.js project
