@@ -33,7 +33,18 @@
     <floor-component :floorData="floor2" :floorTitle="floorName.floor2"></floor-component>
     <floor-component :floorData="floor3" :floorTitle="floorName.floor3"></floor-component>
     <!--Hot Area-->
-    <!-- <div class="HotArea"></div> -->
+    <div class="hotArea">
+      <div class="hotTitle">热卖商品</div>
+      <div class="hotGoods">
+        <van-list>
+          <van-row gutter="20">
+            <van-col span="12" v-for="( item,index ) in hotGoods" :key="index">
+              <goods-info :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,6 +54,8 @@ import axios from "axios";
 import swiperDefault from "../swiper/swiperDefault";
 import recommend from "../swiper/recommend";
 import floorComponent from "../component/floorComponent";
+import goodsInfo from "../component/goodsInfoComponent";
+import url from "@/serviceAPI.config.js";
 export default {
   name: "Home",
   data() {
@@ -56,14 +69,15 @@ export default {
       floor1: [],
       floor2: [],
       floor3: [],
-      floorName: {}
+      floorName: {},
+      hotGoods: [] //热卖商品
     };
   },
-  components: { swiperDefault, recommend, floorComponent },
+  components: { swiperDefault, recommend, floorComponent, goodsInfo },
   created() {
     axios({
       url:
-        "https://www.easy-mock.com/mock/5aea7d4789d8cd17c09d6ca9/myself/shop",
+        url.getHomeInfo,
       method: "get"
     })
       .then(response => {
@@ -78,6 +92,7 @@ export default {
           this.floor2 = response.data.data.floor2;
           this.floor3 = response.data.data.floor3;
           this.floorName = response.data.data.floorName;
+          this.hotGoods = response.data.data.hotGoods;
           this.bannerList = false;
         }
       })
@@ -182,6 +197,23 @@ export default {
     .recommendBody {
       border-bottom: 1px solid #eeeeee;
     }
+  }
+}
+
+.hotArea {
+  overflow: hidden;
+  font-size: 14px;
+  text-align: center;
+
+  .hotTitle {
+    height: 0.8rem;
+    line-height: 0.8rem;
+    background: #f0f0f0;
+  }
+
+  .hotGoods {
+    overflow: hidden;
+    line-height 0.5rem
   }
 }
 </style>

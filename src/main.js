@@ -4,8 +4,8 @@ import './common/rem'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Button, Row, Col } from 'vant'
-Vue.use(Button).use(Row).use(Col)
+import { Button, Row, Col, List, NavBar, Field } from 'vant'
+Vue.use(Button).use(Row).use(Col).use(List).use(NavBar).use(Field);
 
 Vue.config.productionTip = false
 
